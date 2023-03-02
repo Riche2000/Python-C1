@@ -1,0 +1,18 @@
+Python 
+Links de descarga
+https://www.jetbrains.com/es-es/pycharm/download/#section=windows
+https://www.python.org/
+
+Con la consola 
+python -> Consola Interativa
+Podemos hacer aritmetica, Strings, Variables, Ordenes.
+
+Para ejecutar un programa desde la terminal
+Ir al directorio -> python programa.py
+
+input sirve para que el usuario pueda introducir un valor
+
+max nos sirve para poder sacar el valor más alto
+min nos sirve para poder sacar el número más pequeño
+
+--Input y output
