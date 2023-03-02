@@ -19,4 +19,3 @@ if hay_leche != "S" or hay_nesquik != "S":
 print("Ponemos la leche en el vaso")
 print("Ponemos Nesquik en el vaso")
 print("Mezclamos")
-
