@@ -16,3 +16,29 @@ max nos sirve para poder sacar el valor más alto
 min nos sirve para poder sacar el número más pequeño
 
 --Input y output
+
+Funcion type()
+type nos sirve para saber la clase
+Datos escalares significa que solo tienen un valor
+
+Cobersion de datos (Casteo)
+funcones 
+int()
+float()
+
+funcones que devuelen cosas
+max()
+min()
+
+Las variables empiezan con una minuscula y se usan las _ deben tener un nombre descriptivo
+coche_de_un_amigo
+
+Comentarios en Python 
+# Esto es un comentario
+
+condiciones 
+if condicion:
+	asdsdfsdf
+
+if condicion 2:
+	sdfsdfsdf
