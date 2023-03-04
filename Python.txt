@@ -42,3 +42,6 @@ if condicion:
 
 if condicion 2:
 	sdfsdfsdf
+
+Funcion 
+len Nos sirve para coner el largo de un texto
