@@ -45,3 +45,10 @@ if condicion 2:
 
 Funcion 
 len Nos sirve para coner el largo de un texto
+
+While nos sirve para repetir hasat que se cumpla una fuancion
+
+Listas 
+lista = []
+vocales.pop() quita el ultimo elemento de la lista
+
