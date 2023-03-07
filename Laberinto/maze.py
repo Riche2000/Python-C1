@@ -13,24 +13,63 @@ MAP_HEIGHT = 15
 
 NUM_OF_MAP_OBJECTS = 11
 
+obstacle_definition = '''\
+##########################
+                        ##
+                        
+######   ########     ####
+                          
+###         ###    #######
+                          
+###########  ##    #######
+                          
+####         #     #######
+                          
+#####     ######      #### 
+                          
+########      #      #    
+                          
+#######           ####    
+                          
+##############             
+                          
+#####   ################# 
+                          
+#####    ##########      #
+                          
+#####                  ###
+                          
+########      #####       
+                          
+#########    ########   ##
+                          
+##########################\
+'''
+
 #              x, y
 my_position = [6, 3]
 tail_length = 0
 tail = []
 map_objects = []
+
 end_game = False
+died = False
 
-#Generate random objects
-#Mientras el largo del map_ojects
-while len(map_objects) < NUM_OF_MAP_OBJECTS:
-    #COmprobamos que n se repitna las posiciones
-    new_position = [random.randint(0, MAP_WIDTH), random.randint(0, MAP_HEIGHT)]
-
-    if new_position not in map_objects and new_position != my_position:
-        map_objects.append(new_position)
+#Create obstacle map
+obstacle_definition = [list(row) for row in obstacle_definition.split("\n")]
 
 # Main Loop
 while not end_game:
+    # Para borrar la pantalla para windows es cls, mac o linux es cleaar
+    os.system("cls")
+    # Generate random objects
+    # Mientras el largo del map_ojects
+    while len(map_objects) < NUM_OF_MAP_OBJECTS:
+        # COmprobamos que n se repitna las posiciones
+        new_position = [random.randint(0, MAP_WIDTH), random.randint(0, MAP_HEIGHT)]
+
+        if new_position not in map_objects and new_position != my_position:
+            map_objects.append(new_position)
 
     #Draw Map
     print("+"+"-"*MAP_WIDTH*3+"+")
@@ -57,8 +96,11 @@ while not end_game:
                     tail_length += 1
 
                 if tail_in_cell:
-                    print("¡Has muerto!")
                     end_game = True
+                    died = True
+
+            if obstacle_definition[coordinate_y][coordinate_x] == "#":
+                char_to_draw = "#"
 
             print(" {} ".format(char_to_draw), end="")
         print("|")
@@ -94,6 +136,5 @@ while not end_game:
     elif direction == "q":
         end_game = True
 
-    #Para borrar la pantalla apra iwndows es cls, mac o linux es cleaar
-    os.system("cls")
-
+if died:
+    print("¡Has muerto!")
