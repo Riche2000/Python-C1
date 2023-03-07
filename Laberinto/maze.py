@@ -18,6 +18,7 @@ my_position = [6, 3]
 tail_length = 0
 tail = []
 map_objects = []
+end_game = False
 
 #Generate random objects
 #Mientras el largo del map_ojects
@@ -29,7 +30,7 @@ while len(map_objects) < NUM_OF_MAP_OBJECTS:
         map_objects.append(new_position)
 
 # Main Loop
-while True:
+while not end_game:
 
     #Draw Map
     print("+"+"-"*MAP_WIDTH*3+"+")
@@ -39,6 +40,7 @@ while True:
         for coordinate_x in range(MAP_WIDTH):
             char_to_draw = " "
             object_in_cell = None
+            tail_in_cell = None
             for map_object in map_objects:
                 if map_object[POS_X] == coordinate_x and map_object[POS_Y] == coordinate_y:
                     char_to_draw = "*"
@@ -46,6 +48,7 @@ while True:
             for tail_pice in tail:
                 if tail_pice[POS_X] == coordinate_x and tail_pice[POS_Y] == coordinate_y:
                     char_to_draw = "@"
+                    tail_in_cell = tail_pice
             if my_position[POS_X] == coordinate_x and my_position[POS_Y] == coordinate_y:
                 char_to_draw = "@"
 
@@ -53,11 +56,14 @@ while True:
                     map_objects.remove(object_in_cell)
                     tail_length += 1
 
+                if tail_in_cell:
+                    print("¡Has muerto!")
+                    end_game = True
+
             print(" {} ".format(char_to_draw), end="")
         print("|")
 
     print("+"+"-"*MAP_WIDTH*3+"+")
-    print("La cola {}".format(tail))
 
     #Ask usar where he wants to move
 
@@ -86,7 +92,7 @@ while True:
         my_position[POS_X] += 1
         my_position[POS_X] %= MAP_WIDTH
     elif direction == "q":
-        break
+        end_game = True
 
     #Para borrar la pantalla apra iwndows es cls, mac o linux es cleaar
     os.system("cls")
