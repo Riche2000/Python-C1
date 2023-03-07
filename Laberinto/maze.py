@@ -65,10 +65,11 @@ while not end_game:
     # Generate random objects
     # Mientras el largo del map_ojects
     while len(map_objects) < NUM_OF_MAP_OBJECTS:
-        # COmprobamos que n se repitna las posiciones
-        new_position = [random.randint(0, MAP_WIDTH), random.randint(0, MAP_HEIGHT)]
+        # Comprobamos que n se repitna las posiciones
+        new_position = [random.randint(0, MAP_WIDTH-1), random.randint(0, MAP_HEIGHT-1)]
 
-        if new_position not in map_objects and new_position != my_position:
+        if new_position not in map_objects and new_position != my_position and\
+                obstacle_definition[new_position[POS_Y]][new_position[POS_X]] != "#":
             map_objects.append(new_position)
 
     #Draw Map
@@ -113,28 +114,28 @@ while not end_game:
     #usamos la libreria readchar
     direction = readchar.readchar()
 
+    new_position = None
+
     if direction == "w":
-        tail.insert(0, my_position.copy())
-        tail = tail[:tail_length]
-        my_position[POS_Y] -= 1
-        my_position[POS_Y] %= MAP_HEIGHT
+        new_position = [my_position[POS_X], (my_position[POS_Y] - 1) % MAP_WIDTH]
+
     elif direction == "s":
-        tail.insert(0, my_position.copy())
-        tail = tail[:tail_length]
-        my_position[POS_Y] += 1
-        my_position[POS_Y] %= MAP_HEIGHT
+        new_position = [my_position[POS_X], (my_position[POS_Y] + 1) % MAP_WIDTH]
+
     elif direction == "a":
-        tail.insert(0, my_position.copy())
-        tail = tail[:tail_length]
-        my_position[POS_X] -= 1
-        my_position[POS_X] %= MAP_WIDTH
+        new_position = [(my_position[POS_X] - 1) % MAP_WIDTH, my_position[POS_Y]]
+
     elif direction == "d":
-        tail.insert(0, my_position.copy())
-        tail = tail[:tail_length]
-        my_position[POS_X] += 1
-        my_position[POS_X] %= MAP_WIDTH
+        new_position = [(my_position[POS_X] + 1) % MAP_WIDTH, my_position[POS_Y]]
+
     elif direction == "q":
         end_game = True
+
+    if new_position:
+        if obstacle_definition[new_position[POS_Y]][new_position[POS_X]] != "#":
+            tail.insert(0, my_position.copy())
+            tail = tail[:tail_length]
+            my_position = new_position
 
 if died:
     print("¡Has muerto!")
