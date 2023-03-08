@@ -52,3 +52,19 @@ Listas
 lista = []
 vocales.pop() quita el ultimo elemento de la lista
 
+#Funciones sirven para guardar una secuencia de codigo bajo
+#un nombre para poder ejecutarlas haciendo referencia a ese nombre en cualquier momento
+
+#Definimos una funcion
+def saludo_secreto():
+    print("Hola mundo")
+
+    a = input("¿COmo estas?")
+    b = input("¿Dos más dos? ")
+
+    if b == "2":
+        print("Tu si que sabes...")
+
+#Llamamos a la funcion
+saludo_secreto()
+
