@@ -1,7 +1,20 @@
 SALIDA = "SALIR"
 
+items_del_supermercado = ["pollo","maiz","lechuga","pan"]
+
 def preguntar_producto_usuario():
-    return input("Introduce un producto [{} para salir] ".format(SALIDA))
+    item_elegido = input("Introduce un producto [{} para salir] ".format(SALIDA))
+    while item_elegido.lower() not in items_del_supermercado and item_elegido != SALIDA:
+        print("El iten que has escrito no esta en la lista")
+        item_elegido = input("Introduce un producto [{} para salir] ".format(SALIDA))
+    return item_elegido
+
+def guardar_lista_a_disco(lista_compra):
+    # Creamos un archivo .txt con los elementos insertados
+    nombre_fichero = input("¿Como quieres que se llame el archivo?")
+    with open(nombre_fichero + ".txt","w")as mi_archivo:
+        mi_archivo.write("\n".join(lista_compra))
+
 def main():
     lista_compra = []
     input_usuario = preguntar_producto_usuario()
@@ -10,10 +23,9 @@ def main():
         print("\n".join(lista_compra))
         input_usuario = preguntar_producto_usuario()
 
-    #Creamos un archivo .txt con los elementos insertados
-    a=open("compra.txt","w")
-    a.write("\n".join(lista_compra))
-    a.close()
+    guardar_lista_a_disco(lista_compra)
+
+
 
 if __name__ == "__main__":
     main()
