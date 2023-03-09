@@ -1,30 +1,44 @@
-SALIDA = "SALIR"
+SALIR = "SALIR"
 
-items_del_supermercado = ["pollo","maiz","lechuga","pan"]
 
 def preguntar_producto_usuario():
-    item_elegido = input("Introduce un producto [{} para salir] ".format(SALIDA))
-    while item_elegido.lower() not in items_del_supermercado and item_elegido != SALIDA:
-        print("El iten que has escrito no esta en la lista")
-        item_elegido = input("Introduce un producto [{} para salir] ".format(SALIDA))
-    return item_elegido
+    return input("Introduce un producto [{} para salir]]".format(SALIR))
+
 
 def guardar_lista_a_disco(lista_compra):
-    # Creamos un archivo .txt con los elementos insertados
-    nombre_fichero = input("¿Como quieres que se llame el archivo?")
-    with open(nombre_fichero + ".txt","w")as mi_archivo:
+    nombre_fichero = input("Como quieres que se llame el archivo? ")
+    with open(nombre_fichero + ".txt", "w") as mi_archivo:
         mi_archivo.write("\n".join(lista_compra))
+
+
+def guardar_item_en_lista(lista_compra, item_a_guardar):
+    if item_a_guardar.lower() in [a.lower() for a in lista_compra]:
+        print("El producto ya existe!")
+    else:
+        lista_compra.append(item_a_guardar)
+
+
+def incrementar(num):
+    num += 1
+    return num
+
 
 def main():
     lista_compra = []
+
     input_usuario = preguntar_producto_usuario()
-    while input_usuario != SALIDA:
-        lista_compra.append(input_usuario)
+
+    numero = 8
+    incrementar(numero)
+    incrementar(numero)
+    incrementar(numero)
+
+    while input_usuario != SALIR:
+        guardar_item_en_lista(lista_compra, input_usuario)
         print("\n".join(lista_compra))
         input_usuario = preguntar_producto_usuario()
 
     guardar_lista_a_disco(lista_compra)
-
 
 
 if __name__ == "__main__":
